@@ -2,19 +2,18 @@ package com.microservice.dept.controller;
 
 import com.microservice.dept.model.Department;
 import com.microservice.dept.repo.DeptRepo;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/dept")
 public class DeptController {
 
-    private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(DeptController.class);
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(DeptController.class);
     @Autowired
     private DeptRepo deptRepo;
 
@@ -25,16 +24,19 @@ public class DeptController {
 
     @PostMapping("addDept")
     public Department addDept(@RequestBody Department department){
-            return deptRepo.addDepartment(department);
+        LOGGER.info("Dept added: {}"+ department);
+        return deptRepo.addDepartment(department);
     }
 
     @GetMapping("/getList")
     public List<Department> getDepts(){
+        LOGGER.info("Dept list found");
         return deptRepo.findAll();
     }
 
     @GetMapping("/getById/{dId}")
     public Department getById(@PathVariable Long dId){
+        LOGGER.info("Dept found: {}", dId);
         return deptRepo.findById(dId);
     }
 }
