@@ -2,6 +2,7 @@
 spring:
   application:
     name: Service-Department
+
   config:
     import: "optional:configserver:http://localhost:8088"
 
