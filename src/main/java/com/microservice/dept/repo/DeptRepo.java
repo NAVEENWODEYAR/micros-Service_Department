@@ -18,7 +18,7 @@ public class DeptRepo {
 
     public Department findById(Long dId){
         return depts.stream()
-                .filter(department -> department.getdId().equals(dId))
+                .filter(department -> department.getdId() == dId)
                 .findFirst()
                 .orElseThrow();
     }
