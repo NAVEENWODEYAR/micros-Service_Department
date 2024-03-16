@@ -9,22 +9,22 @@ import java.util.List;
 @Repository
 public class DeptRepo {
 
-    private List<Department> depts = new ArrayList<>();
+    private List<Department> departments = new ArrayList<>();
 
     public Department addDepartment(Department department){
-        depts.add(department);
+        departments.add(department);
         return department;
     }
 
     public Department findById(Long dId){
-        return depts.stream()
+        return departments.stream()
                 .filter(department -> department.getdId() == dId)
                 .findFirst()
                 .orElseThrow();
     }
 
     public List<Department> findAll(){
-        return depts;
+        return departments;
     }
 
 
