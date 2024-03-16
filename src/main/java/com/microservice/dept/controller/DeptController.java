@@ -19,7 +19,7 @@ public class DeptController {
 
     @GetMapping("/test")
     public String greetMsg(){
-        return "Welcome!,";
+        return "Welcome to Department Service!,";
     }
 
     @PostMapping("addDept")
