@@ -1,5 +1,6 @@
 package com.microservice.dept.controller;
 
+import com.microservice.dept.client.EmployeeClient;
 import com.microservice.dept.model.Department;
 import com.microservice.dept.repo.DeptRepo;
 import org.slf4j.Logger;
@@ -16,6 +17,9 @@ public class DeptController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DeptController.class);
     @Autowired
     private DeptRepo deptRepo;
+
+    @Autowired
+    private EmployeeClient employeeClient;
 
     @GetMapping("/test")
     public String greetMsg(){
@@ -39,4 +43,15 @@ public class DeptController {
         LOGGER.info("Dept found: {}", dId);
         return deptRepo.findById(dId);
     }
+
+    @GetMapping("/with-employees")
+    public List<Department> findDeptEmpLit(){
+        LOGGER.info("Dept found,");
+        List<Department> depts = deptRepo.findAll();
+
+        depts.forEach(dept->dept.setEmployees
+                (employeeClient.findByDept(dept.getdId())));
+        return depts;
+    }
+
 }
